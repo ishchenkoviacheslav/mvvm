@@ -29,6 +29,49 @@ namespace mvvm
                   }));
             }
         }
+
+        // команда удаления
+        private RelayCommand removeCommand;
+        public RelayCommand RemoveCommand
+        {
+            get
+            {
+                return removeCommand ??
+                  (removeCommand = new RelayCommand(obj =>
+                  {
+                      Phone phone = obj as Phone;
+                      if (phone != null)
+                      {
+                          Phones.Remove(phone);
+                      }
+                  },
+                 (obj) => Phones.Count > 0));
+            }
+        }
+
+        private RelayCommand doubleCommand;
+        public RelayCommand DoubleCommand
+        {
+            get
+            {
+                return doubleCommand ??
+                    (doubleCommand = new RelayCommand(obj =>
+                    {
+                        Phone phone = obj as Phone;
+                        if (phone != null)
+                        {
+                            Phone phoneCopy = new Phone
+                            {
+                                Company = phone.Company,
+                                Price = phone.Price,
+                                Title = phone.Title
+                            };
+                            Phones.Insert(0, phoneCopy);
+                        }
+                    }));
+            }
+        }
+
         public Phone SelectedPhone
         {
             get { return selectedPhone; }
