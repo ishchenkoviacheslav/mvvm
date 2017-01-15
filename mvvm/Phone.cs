@@ -5,12 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 namespace mvvm
 {
+    [DataContract]
     class Phone : INotifyPropertyChanged
     {
+        [DataMember]
         private string title;
+        [DataMember]
         private string company;
+        [DataMember]
         private int price;
 
         public string Title

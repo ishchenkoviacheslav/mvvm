@@ -25,11 +25,19 @@
             <ColumnDefinition Width="0.8*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.2*"/>
         </Grid.RowDefinitions>
-
-        <ListBox Grid.Column="0" ItemsSource="{Binding Phones}"
+        
+        <Menu Grid.ColumnSpan="2" >
+            <MenuItem Header="Файл">
+                <MenuItem Header="Открыть" Command="{Binding OpenCommand}" />
+                <MenuItem Header="Сохранить" Command="{Binding SaveCommand}" />
+            </MenuItem>
+        </Menu>
+        
+        <ListBox Grid.Row="1" ItemsSource="{Binding Phones}"
                  SelectedItem="{Binding SelectedPhone}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -42,7 +50,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
             <Button Command="{Binding AddCommand}">+</Button>
             <Button Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectedPhone}">-</Button>
             <Button Content="2x">
@@ -56,7 +64,7 @@
             </Button>
         </StackPanel>
 
-        <StackPanel Grid.Column="1" DataContext="{Binding SelectedPhone}">
+        <StackPanel Grid.Column="1" Grid.Row ="1" DataContext="{Binding SelectedPhone}">
             <TextBlock Text="Выбранный элемент"  />
             <TextBlock Text="Модель" />
             <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" />
